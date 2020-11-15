@@ -30,5 +30,5 @@ export function formatOutput({
 
 	return `${abilityTags} ${interestTags} ${merchantInfo.length} ${
 		studentInfo.length
-	} ${merchantInfo.join(' ')} ${studentInfo.join(' ')}`
+	} ${studentInfo.join(' ')} ${merchantInfo.join(' ')}`
 }
