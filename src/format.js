@@ -13,11 +13,11 @@ const formatStudentInfo = studentData =>
 const formatMerchantInfo = merchantData =>
 	merchantData.map(
 		merchant =>
-			`${merchant.name} ${merchant.salary} ${merchant.ability.join(
-				' '
-			)} ${merchant.interest.join(' ')} ${merchant.workingPeriod} ${
-				merchant.restTime
-			}`
+			`${merchant.name} ${merchant.jobs} ${
+				merchant.salary
+			} ${merchant.ability.join(' ')} ${merchant.interest.join(' ')} ${
+				merchant.workingPeriod
+			} ${merchant.restTime}`
 	)
 
 // formatOutput :: object -> string
