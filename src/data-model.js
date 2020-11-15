@@ -112,8 +112,8 @@ const generateStudentData = (
 export const generateData = (
 	merchants = 100,
 	studentMerchantRatio = 3,
-	abilityTags = 20,
-	interestTags = 20
+	abilityTags = 4,
+	interestTags = 4
 ) => ({
 	merchantData: generateMerchantData(merchants, abilityTags, interestTags),
 	studentData: generateStudentData(

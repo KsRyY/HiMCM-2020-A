@@ -10,10 +10,10 @@ cli.option('-n, --name <name>', 'Output file name', {
 		default: './',
 	})
 	.option('-a, --abilityTags <num>', 'Number of abilities', {
-		default: 20,
+		default: 4,
 	})
 	.option('-i, --interestTags <num>', 'Number of interests', {
-		default: 20,
+		default: 4,
 	})
 	.option('-m, --merchants <num>', 'Number of merchants', {
 		default: 100,
