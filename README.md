@@ -1,0 +1,5 @@
+# HiMCM 2020 QUESTION A
+
+## License
+
+***ALL RIGHTS RESERVED***
