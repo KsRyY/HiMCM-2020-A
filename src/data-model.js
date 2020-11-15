@@ -1,16 +1,21 @@
 import faker from 'faker'
 
+const randomInt = (min, max) =>
+	Math.floor(Math.random() * (max - min + 1) + min)
+
+const randomIntFromZero = max => randomInt(0, max)
+
 function generateWorkingPeriod() {
-	const startHour = faker.random.number(23)
+	const startHour = randomIntFromZero(23)
 
 	if (startHour < 7 || startHour > 19) {
 		return generateWorkingPeriod()
 	}
 
 	let pass = true
-	const startMinute = faker.random.number(59)
-	const periodHour = faker.random.number(11)
-	const periodMinute = faker.random.number(59)
+	const startMinute = randomIntFromZero(59)
+	const periodHour = randomIntFromZero(11)
+	const periodMinute = randomIntFromZero(59)
 	let endHour = startHour + periodHour
 	const endMinute = (() => {
 		const calcEndMinute = startMinute + periodMinute
@@ -68,7 +73,7 @@ const MerchantModel = (
 })
 
 const generateTags = tagCount =>
-	new Array(tagCount).fill(0).map(() => faker.random.number(100))
+	new Array(tagCount).fill(0).map(() => randomIntFromZero(100))
 
 const generateMerchantData = (merchants, abilityTags, interestTags) =>
 	new Array(merchants)
@@ -76,12 +81,12 @@ const generateMerchantData = (merchants, abilityTags, interestTags) =>
 		.map(() =>
 			MerchantModel(
 				faker.random.uuid(),
-				faker.random.number(4) + 1,
-				faker.random.number(17) + 17,
+				randomInt(1, 5),
+				randomInt(17, 34),
 				generateTags(abilityTags),
 				generateTags(interestTags),
 				generateWorkingPeriod(),
-				faker.random.number(6)
+				randomIntFromZero(6)
 			)
 		)
 
@@ -96,11 +101,11 @@ const generateStudentData = (
 		.map(() =>
 			GeneralModel(
 				faker.random.uuid(),
-				faker.random.number(17) + 17,
+				randomInt(17, 34),
 				generateTags(abilityTags),
 				generateTags(interestTags),
 				generateWorkingPeriod(),
-				faker.random.number(6)
+				randomIntFromZero(6)
 			)
 		)
 
