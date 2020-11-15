@@ -1,0 +1,37 @@
+{
+	"name": "himcm-2020-a",
+	"version": "1.0.0",
+	"main": "src/index.js",
+	"author": "Andy Chen, Peter Wei, Michael Yin",
+	"license": "MIT",
+	"private": true,
+	"devDependencies": {
+		"eslint-config-prettier": "^6.15.0",
+		"eslint-plugin-prettier": "^3.1.4",
+		"xo": "^0.34.2"
+	},
+	"type": "module",
+	"xo": {
+		"extends": [
+			"plugin:prettier/recommended"
+		],
+		"rules": {
+			"new-cap": [
+				"error",
+				{
+					"capIsNew": false
+				}
+			],
+			"max-params": 0,
+			"import/extensions": 0,
+			"capitalized-comments": 0
+		}
+	},
+	"engines": {
+		"node": ">=12"
+	},
+	"dependencies": {
+		"faker": "^5.1.0",
+		"fs-extra": "^9.0.1"
+	}
+}
