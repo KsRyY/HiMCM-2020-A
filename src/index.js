@@ -26,11 +26,13 @@ cli.option('-n, --name <name>', 'Output file name', {
 
 const { options } = cli.parse()
 
-write(
-	options.output,
-	options.name,
-	options.merchants,
-	options.ratio,
-	options.abilityTags,
-	options.interestTags
-)
+if (!(options.help || options.version)) {
+	write(
+		options.output,
+		options.name,
+		options.merchants,
+		options.ratio,
+		options.abilityTags,
+		options.interestTags
+	)
+}
