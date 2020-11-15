@@ -1,22 +1,6 @@
 import faker from 'faker'
 
-const GeneralModel = (
-	name,
-	salary,
-	ability,
-	interest,
-	workingPeriod,
-	restTime
-) => ({
-	name,
-	salary,
-	ability,
-	interest,
-	workingPeriod,
-	restTime,
-})
-
-export function generateWorkingPeriod() {
+function generateWorkingPeriod() {
 	const startHour = faker.random.number(23)
 
 	if (startHour < 7 || startHour > 19) {
@@ -54,20 +38,45 @@ export function generateWorkingPeriod() {
 	return `${startHour}:${startMinute} ${endHour}:${endMinute}`
 }
 
+const GeneralModel = (
+	name,
+	salary,
+	ability,
+	interest,
+	workingPeriod,
+	restTime
+) => ({
+	name,
+	salary,
+	ability,
+	interest,
+	workingPeriod,
+	restTime,
+})
+
+const MerchantModel = (
+	name,
+	jobs,
+	salary,
+	ability,
+	interest,
+	workingPeriod,
+	restTime
+) => ({
+	...GeneralModel(name, salary, ability, interest, workingPeriod, restTime),
+	jobs,
+})
+
 const generateTags = tagCount =>
 	new Array(tagCount).fill(0).map(() => faker.random.number(100))
 
-export function generateData(
-	merchants = 100,
-	studentMerchantRatio = 10,
-	abilityTags = 20,
-	interestTags = 20
-) {
-	const studentData = new Array(merchants * studentMerchantRatio)
+const generateMerchantData = (merchants, abilityTags, interestTags) =>
+	new Array(merchants)
 		.fill(0)
 		.map(() =>
-			GeneralModel(
+			MerchantModel(
 				faker.random.uuid(),
+				faker.random.number(4) + 1,
 				faker.random.number(17) + 17,
 				generateTags(abilityTags),
 				generateTags(interestTags),
@@ -75,7 +84,14 @@ export function generateData(
 				faker.random.number(6)
 			)
 		)
-	const merchantData = new Array(merchants)
+
+const generateStudentData = (
+	merchants,
+	studentMerchantRatio,
+	abilityTags,
+	interestTags
+) =>
+	new Array(merchants * studentMerchantRatio)
 		.fill(0)
 		.map(() =>
 			GeneralModel(
@@ -88,10 +104,19 @@ export function generateData(
 			)
 		)
 
-	return {
-		merchantData,
-		studentData,
+export const generateData = (
+	merchants = 100,
+	studentMerchantRatio = 3,
+	abilityTags = 20,
+	interestTags = 20
+) => ({
+	merchantData: generateMerchantData(merchants, abilityTags, interestTags),
+	studentData: generateStudentData(
+		merchants,
+		studentMerchantRatio,
 		abilityTags,
-		interestTags,
-	}
-}
+		interestTags
+	),
+	abilityTags,
+	interestTags,
+})
