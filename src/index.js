@@ -1,7 +1,7 @@
 import { write } from './write.js'
 import cac from 'cac'
 
-const cli = cac('HiMCM 2020 Question A - Data Generator')
+const cli = cac('himcm2020-a-datagen')
 
 cli.option('-n, --name <name>', 'Output file name', {
 	default: 'output',
