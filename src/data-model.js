@@ -35,6 +35,8 @@ const GeneralModel = (
 	restTime,
 })
 
+const StudentModel = GeneralModel
+
 const MerchantModel = (
 	name,
 	jobs,
@@ -75,7 +77,7 @@ const generateStudentData = (
 	new Array(merchants * studentMerchantRatio)
 		.fill(0)
 		.map(() =>
-			GeneralModel(
+			StudentModel(
 				faker.random.uuid(),
 				randomInt(17, 34),
 				generateTags(abilityTags),
