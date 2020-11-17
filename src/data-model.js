@@ -1,46 +1,22 @@
 import faker from 'faker'
-
-const randomInt = (min, max) =>
-	Math.floor(Math.random() * (max - min + 1) + min)
-
-const randomIntFromZero = max => randomInt(0, max)
+import { randomInt, randomIntFromZero } from './random.js'
+import { Time } from './time.js'
 
 function generateWorkingPeriod() {
-	const startHour = randomIntFromZero(23)
+	const start = Time(randomIntFromZero(23), randomIntFromZero(59))
 
-	if (startHour < 7 || startHour > 19) {
+	if (start.verifyHour(hour => hour < 7 || hour > 19)) {
 		return generateWorkingPeriod()
 	}
 
-	let pass = true
-	const startMinute = randomIntFromZero(59)
-	const periodHour = randomIntFromZero(11)
-	const periodMinute = randomIntFromZero(59)
-	let endHour = startHour + periodHour
-	const endMinute = (() => {
-		const calcEndMinute = startMinute + periodMinute
-		if (calcEndMinute > 60) {
-			endHour += 1
-			if (endHour >= 19) {
-				pass = false
-				return
-			}
+	const period = Time(randomIntFromZero(11), randomIntFromZero(59))
+	const end = start.addBy(...period.wrap())
 
-			return calcEndMinute - 60
-		}
-
-		return calcEndMinute
-	})()
-
-	if (endHour >= 19) {
+	if (end.verifyHour(hour => hour > 18)) {
 		return generateWorkingPeriod()
 	}
 
-	if (!pass) {
-		return generateWorkingPeriod()
-	}
-
-	return `${startHour}:${startMinute} ${endHour}:${endMinute}`
+	return `${start} ${end}`
 }
 
 const GeneralModel = (
