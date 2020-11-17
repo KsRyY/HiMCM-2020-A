@@ -1,2 +1,12 @@
 node_modules
 dist
+
+# data
+input.txt
+output.txt
+output.json
+!data/**/*
+
+# binary data
+*.exe
+*.7z
